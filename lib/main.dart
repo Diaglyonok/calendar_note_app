@@ -1,4 +1,4 @@
-import 'package:calendar_note_app/home_page.dart';
+import 'package:calendar_note_app/test.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               onSurface: Colors.black,
             ),
       ),
-      home: const HomePage(),
+      home: const OfferPage(),
     );
   }
 }

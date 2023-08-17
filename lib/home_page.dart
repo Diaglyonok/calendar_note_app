@@ -1,4 +1,5 @@
 import 'package:calendar_note_app/date_utils.dart';
+import 'package:calendar_note_app/test.dart';
 import 'package:calendar_note_app/widgets/calendar_widget.dart';
 import 'package:calendar_note_app/widgets/text_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,40 +21,45 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: TextCardWidget(
-                  note: notes[selectedDay] ?? '',
-                  onTextChanged: (text) {
-                    setState(() {
-                      if (text == '') {
-                        notes.remove(selectedDay);
-                      } else {
-                        notes[selectedDay] = text;
-                      }
-                    });
-                  },
-                  key: ValueKey(selectedDay),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: CalendarWidget(
-                    onDaySelected: (day) {
-                      setState(() => selectedDay = day);
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const OfferPage()));
+        },
+        child: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextCardWidget(
+                    note: notes[selectedDay] ?? '',
+                    onTextChanged: (text) {
+                      setState(() {
+                        if (text == '') {
+                          notes.remove(selectedDay);
+                        } else {
+                          notes[selectedDay] = text;
+                        }
+                      });
                     },
-                    notes: notes,
-                    selectedDay: selectedDay,
+                    key: ValueKey(selectedDay),
                   ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: CalendarWidget(
+                      onDaySelected: (day) {
+                        setState(() => selectedDay = day);
+                      },
+                      notes: notes,
+                      selectedDay: selectedDay,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
